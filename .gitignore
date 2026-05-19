@@ -36,3 +36,4 @@ id_rsa*
 .cache
 
 secrets/
+.notes.md

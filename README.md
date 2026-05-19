@@ -24,16 +24,10 @@ My registrar allows me to add A record for my IP address. Also https://metairie.
 Run locally in bash (.devcontainer) or gitbash
 
 ```bash
-# windows pc
-git config --local core.sshCommand "ssh -i /c/Users/steph/.ssh/github_eossf/id_rsa"
-# macosx
-git config --local core.sshCommand "ssh -i ~/.ssh/github_eossf/id_rsa"
-
-git config --local user.email "stephane.metairiev@gmail.com"
-git config --local user.name "Stephane Metairie"
-
+# your secrets here in .env
 cd src/infra/secrets
 source ./export_TF_VARS.sh
+
 cd src/infra
 terraform fmt -recursive
 terraform init
