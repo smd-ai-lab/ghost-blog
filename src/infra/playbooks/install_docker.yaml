@@ -4,3 +4,21 @@
     - name: Install Docker
       ansible.builtin.shell: |
         curl -fsSL https://get.docker.com | sh
+
+    - name: Install Docker Compose
+      ansible.builtin.shell: |
+        curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        chmod +x /usr/local/bin/docker-compose
+        docker-compose --version
+
+    - name: Ensure Docker service is running and enabled
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add user to docker group
+      ansible.builtin.user:
+        name: root
+        groups: docker
+        append: yes
