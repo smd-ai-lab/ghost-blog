@@ -244,4 +244,3 @@ resource "local_file" "compose" {
   content  = data.template_file.compose.rendered
   filename = "${path.module}/docker-compose.yaml"
 }
-
