@@ -1,6 +1,6 @@
 resource "vultr_ssh_key" "default" {
   name    = "current-ssh-key"
-  ssh_key = file("~/.ssh/id_rsa.pub")
+  ssh_key = file("${path.module}/secrets/id_rsa.pub")
 
   lifecycle {
     ignore_changes = [ssh_key]

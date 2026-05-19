@@ -1,6 +1,15 @@
 data "template_file" "compose" {
   template = <<-EOT
-    services:
+    volumes:
+      caddy_data:
+      caddy_config:
+      tinybird_files:
+      tinybird_home:
+      traffic_analytics_data:
+    networks:
+      ghost_network:
+
+    services:       
       caddy:
         image: caddy:2.10.2-alpine@sha256:953131cfea8e12bfe1c631a36308e9660e4389f0c3dfb3be957044d3ac92d446
         restart: always
@@ -22,7 +31,7 @@ data "template_file" "compose" {
 
       ghost:
         # Do not alter this without updating the Tinybird Sync container as well
-        image: ghost:${GHOST_VERSION:-6-alpine}
+        image: ghost:6-alpine
         restart: always
         # This is required to import current config when migrating
         env_file:
@@ -42,7 +51,7 @@ data "template_file" "compose" {
           tinybird__tracker__datasource: analytics_events
           tinybird__stats__endpoint: ${var.tinybird_stats_endpoint}
         volumes:
-          - ${UPLOAD_LOCATION:-./data/ghost}:/var/lib/ghost/content
+          - ${var.upload_location}:/var/lib/ghost/content
         depends_on:
           db:
             condition: service_healthy
@@ -194,39 +203,40 @@ data "template_file" "compose" {
         profiles: [activitypub]
         restart: no
 
-    volumes:
-      caddy_data:
-      caddy_config:
-      tinybird_files:
-      tinybird_home:
-      traffic_analytics_data:
-
-    networks:
-      ghost_network:
-
   EOT
 
   vars = {
-    domain                     = var.domain
-    admin_domain               = var.admin_domain
-    http_port                  = var.http_port
-    https_port                 = var.https_port
-    database_user              = var.database_user
-    activitypub_target         = var.activitypub_target
-    database_root_password     = var.database_root_password
-    database_password          = var.database_password
-    mail_transport             = var.mail_transport
-    mail_options_host          = var.mail_options_host
-    mail_options_port          = var.mail_options_port
-    mail_options_secure        = var.mail_options_secure
-    mail_options_auth_user     = var.mail_options_auth_user
-    mail_options_auth_pass     = var.mail_options_auth_pass
-    mail_from                  = var.mail_from
-    upload_location            = var.upload_location
-    mysql_data_location        = var.mysql_data_location
-    tinybird_stats_endpoint    = var.tinybird_stats_endpoint
-    tinybird_adminToken        = var.tinybird_admin_token
-    tinybird_workspaceId       = var.tinybird_workspace_id
+    domain                  = var.domain
+    admin_domain            = var.admin_domain
+    http_port               = var.http_port
+    https_port              = var.https_port
+    database_user           = var.database_user
+    activitypub_target      = var.activitypub_target
+    database_root_password  = var.database_root_password
+    database_password       = var.database_password
+    mail_transport          = var.mail_transport
+    mail_options_host       = var.mail_options_host
+    mail_options_port       = var.mail_options_port
+    mail_options_secure     = var.mail_options_secure
+    mail_options_auth_user  = var.mail_options_auth_user
+    mail_options_auth_pass  = var.mail_options_auth_pass
+    mail_from               = var.mail_from
+    upload_location         = var.upload_location
+    mysql_data_location     = var.mysql_data_location
+    tinybird_stats_endpoint = var.tinybird_stats_endpoint
+    tinybird_adminToken     = var.tinybird_admin_token
+    tinybird_workspaceId    = var.tinybird_workspace_id
+    #
+    n8n_basic_auth_user        = var.n8n_basic_auth_user
+    encryption_key             = var.n8n_encryption_key
+    n8n_password               = var.n8n_password
+    n8n_user                   = var.n8n_user
+    pinecone_api_key           = var.pinecone_api_key
+    postgres_db                = var.postgres_db
+    postgres_non_root_password = var.postgres_non_root_password
+    postgres_non_root_user     = var.postgres_non_root_user
+    postgres_password          = var.postgres_password
+    postgres_user              = var.postgres_user
   }
 }
 
@@ -234,3 +244,4 @@ resource "local_file" "compose" {
   content  = data.template_file.compose.rendered
   filename = "${path.module}/docker-compose.yaml"
 }
+

@@ -9,7 +9,7 @@ resource "null_resource" "install_docker_with_ansible" {
       type        = "ssh"
       host        = vultr_instance.current.main_ip
       user        = "root"
-      private_key = file("${path.module}/id_rsa")
+      private_key = file("${path.module}/secrets/id_rsa")
     }
   }
 
@@ -22,7 +22,7 @@ resource "null_resource" "install_docker_with_ansible" {
       type        = "ssh"
       host        = vultr_instance.current.main_ip
       user        = "root"
-      private_key = file("${path.module}/id_rsa")
+      private_key = file("${path.module}/secrets/id_rsa")
     }
   }
 }

@@ -32,8 +32,9 @@ git config --local core.sshCommand "ssh -i ~/.ssh/github_eossf/id_rsa"
 git config --local user.email "stephane.metairiev@gmail.com"
 git config --local user.name "Stephane Metairie"
 
-cd src/infra
+cd src/infra/secrets
 source ./export_TF_VARS.sh
+cd src/infra
 terraform fmt -recursive
 terraform init
 terraform validate

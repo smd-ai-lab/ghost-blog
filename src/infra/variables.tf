@@ -34,8 +34,8 @@ variable "admin_domain" {
 
 variable "database_user" {
   description = "mysql user"
-  type = string
-  default = "eizouwrwoiu897002"
+  type        = string
+  default     = "eizouwrwoiu897002"
 }
 
 variable "http_port" {
@@ -99,11 +99,13 @@ variable "mail_from" {
 variable "upload_location" {
   description = "Location for file uploads"
   type        = string
+  default     = "./data/ghost"
 }
 
 variable "mysql_data_location" {
   description = "Location for MySQL data"
   type        = string
+  default     = "./data/mysql"
 }
 
 variable "activitypub_target" {
@@ -114,6 +116,6 @@ variable "activitypub_target" {
 
 variable "tinybird_stats_endpoint" {
   description = "Tinybird stats endpoint"
-  type = string
-  default = "https://api.tinybird.co"
+  type        = string
+  default     = "https://api.tinybird.co"
 }
