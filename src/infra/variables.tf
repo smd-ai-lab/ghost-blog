@@ -119,3 +119,19 @@ variable "tinybird_stats_endpoint" {
   type        = string
   default     = "https://api.tinybird.co"
 }
+
+variable "tinybird_admin_token" {
+  description = "Tinybird admin token"
+  type        = string
+  sensitive   = true
+}
+
+variable "tinybird_workspace_id" {
+  description = "Tinybird workspace ID"
+  type        = string
+}
+
+variable "tinybird_tracker_token" {
+  description = "value"
+  sensitive   = true
+}
