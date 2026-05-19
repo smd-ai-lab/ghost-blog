@@ -1,4 +1,4 @@
-resource "null_resource" "launch" {
+resource "null_resource" "launch_ghost" {
   depends_on = [null_resource.install_docker_with_ansible, local_file.compose]
 
   provisioner "file" {
