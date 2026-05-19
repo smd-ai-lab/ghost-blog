@@ -1,0 +1,59 @@
+# Python-related files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+*.env
+*.venv
+env/
+venv/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Bash-related files
+*.sh~
+*.bak
+*.swp
+*.swo
+*.tmp
+
+# Terraform-related files
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+.terraform/
+.terraform.lock.hcl
+crash.log
+override.tf
+override.tf.json
+terraform.rc
+terraform.d/
+
+# github actions
+actions-runner/
+
+# tls ssl bundle / let's encrypt
+*.pem
+*-ssl-bundle*
+certs/
+id_rsa
+
+# generated files
+*docker-compose.yml
+*docker-compose.yaml
+
+# cache
+.cache
+
+# n8n
+.n8n/
+
