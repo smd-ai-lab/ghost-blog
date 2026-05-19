@@ -79,7 +79,7 @@ data "template_file" "compose" {
           MYSQL_DATABASE: ghost
           MYSQL_MULTIPLE_DATABASES: activitypub
         volumes:
-          - ${var.mysql_data_location}
+          - ${var.mysql_data_location}:/var/lib/mysql
           - ./mysql-init:/docker-entrypoint-initdb.d
         healthcheck:
           test: mysqladmin ping -p$$MYSQL_ROOT_PASSWORD -h 127.0.0.1
